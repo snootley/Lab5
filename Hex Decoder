@@ -1,0 +1,42 @@
+git init website
+
+//package com.company;
+
+import java.util.Scanner;
+
+public class Main {
+
+    public static void main(String[] args) {
+	// write your code here
+        System.out.print("Enter a hexadecimal number: ");
+        Scanner scnr = new Scanner(System.in);
+        String hexNum = scnr.next();                              // Allows for various character type inputs
+        hexNum = hexNum.toUpperCase();                            // Makes the input case insensitive, it will convert all lower case letter to upper case
+
+
+        int inputIndex = hexNum.length() - 1;                     // Sets the index/ position of each character inputted by the user
+        long nbr = 0;
+        long result = 0;
+
+        for (int i = 0; i < hexNum.length(); i++) {               // For loop to break down the user input by it's length
+
+            char inputChar = hexNum.charAt(i);                    // New character type to read position i from the user input, hexNum
+            int asciiValue = (int)inputChar;                      // Creating a new variable and switching inputChar's data type to int
+
+            if(asciiValue >= 48 && asciiValue <= 57) {            // ASCII values for numbers 1 - 9
+            nbr = asciiValue - 48;                                // Subtracting to assign the wanted value to numbers 1 - 9 instead of the numbers they are stored as
+            }
+
+            if(asciiValue >= 65 && asciiValue <= 70) {            // ASCII values for letters A - F
+                nbr = asciiValue - 55;                            // Must subtract to assign the correct value to the corresponding letter
+            }
+
+            result += nbr * (long)Math.pow(16,inputIndex);         // Converts the hexadecimal number into a decimal value
+            inputIndex--;                                         // Decreases the position of the iteration, you get the next position after each iteration
+
+        } // End of for loop
+
+        System.out.println("Your number is " + result + " in decimal");
+        scnr.close();
+    } // End of main
+}
